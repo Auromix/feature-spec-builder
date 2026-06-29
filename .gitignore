@@ -1,0 +1,12 @@
+# Build output
+/dist/
+*.skill
+
+# macOS
+.DS_Store
+
+# Editor / OS cruft
+*.swp
+*~
+.idea/
+.vscode/

@@ -1,0 +1,37 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate skill structure
+        run: |
+          set -euo pipefail
+          test -f skill/feature-spec-builder/SKILL.md
+          # SKILL.md must start with YAML frontmatter containing name + description
+          head -1 skill/feature-spec-builder/SKILL.md | grep -qx -- '---'
+          grep -qE '^name:'        skill/feature-spec-builder/SKILL.md
+          grep -qE '^description:'  skill/feature-spec-builder/SKILL.md
+          # No hard section numbers should leak into the docs (references must be by name)
+          if grep -rnE '第 ?[0-9]+ ?节' skill/; then
+            echo "::error::found hard section-number reference (第N节); reference sections by name instead"
+            exit 1
+          fi
+          echo "skill structure OK"
+
+      - name: Build .skill package
+        run: ./scripts/build-skill.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: feature-spec-builder-skill
+          path: dist/feature-spec-builder.skill
