@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2026-07-01
+
+### Added
+- **Testing / QA as a first-class role** in the Reader Guide (roles are chosen per feature type;
+  Testing/QA is always included — it cares about acceptance criteria, the platform matrix to cover,
+  and whether the external contract is testable). Guidance to organize the body into by-role chapters.
+- **"Plain but rigorous" rule**: prose stays plain, but anything that is an *external output standard*
+  (interface definitions, message/data formats, the full platform matrix, deliverable form, acceptance
+  criteria) must be precise, unambiguous, and testable — collected in an "external contract" chapter.
+
 ## [1.5.0] - 2026-07-01
 
 ### Added
@@ -120,6 +130,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.5.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.1
 [1.5.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.0
 [1.4.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.1
 [1.4.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.0
