@@ -4,6 +4,26 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-07-01
+
+### Added
+- **Archetype J — Hardware end-effector / physical-interface spec & modification resources.** For
+  features whose deliverable is *hardware-interface documentation* a customer uses to bolt a custom
+  end-effector onto the robot — where the **external contract is a physical interface** (mechanical:
+  mounting flange / bolt pattern / tolerances / payload / torque; electrical: connector part number /
+  pinout / power envelope / protocol), **not a software API**. 6 probes (physical-contract matrix;
+  model × hardware-revision lock; drawing↔as-built consistency; **physical safety red lines**
+  payload/torque/power + no-touch zones + liability/authorization; deliverable precision STEP/DXF/PDF
+  + self-check; copyable reference end-effector). Reuses H's skeleton (support level, version matrix,
+  anti-rot, copyability) with physical content.
+- **"Interface contract" generalized** in SKILL.md: contracts are either *software* (signature/params/
+  errors) or *physical* (mechanical/electrical) — physical-interface features use J's physical fields,
+  not software fields.
+- **Safety dimension generalized** from "dangerous API call" to also cover **"dangerous physical
+  modification"** (dimension 13 + principle 6): payload/torque/power red lines, no-touch zones,
+  re-calibration after end-effector change, authorization / warranty / liability / disclaimer.
+- Worked example `references/example-hardware-mod.md`.
+
 ## [1.5.1] - 2026-07-01
 
 ### Added
@@ -130,6 +150,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.6.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.6.0
 [1.5.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.1
 [1.5.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.0
 [1.4.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.1
