@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-07-01
+
+### Added
+- **Archetype H probe ⑥ — copyability / extension-pattern & simplicity.** For reference-example
+  features, whether a customer can *follow the pattern to adapt other interfaces themselves* often
+  matters more than "does it run". Adds: is there one uniform, copyable mapping/adapter pattern
+  (add-your-own = copy one unit + register one line)? a "how to add your own X" doc + a runnable
+  add-on example? is it simple enough / anti-over-engineering? Acceptance anchor: an outsider can
+  add one in N minutes. Surfaced while running the skill on the ROS requirement ("要有充分的参考
+  意义，客户能仿照着自己去新适配 SDK 的其他接口，足够简单"). Reflected in the ROS worked example too.
+
 ## [1.2.0] - 2026-06-29
 
 ### Added
@@ -68,6 +79,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.3.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.3.0
 [1.2.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.0.0
