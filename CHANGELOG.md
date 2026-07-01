@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-07-01
+
+### Added
+- **"Here are our company docs" now triggers config generation.** v1.8.0 shipped the org/process
+  config mechanism but had no explicit trigger — an LLM wouldn't reliably treat "these are our company
+  materials" as a signal to build the config. Added: an explicit trigger in config-zone group F (detect
+  when the user provides company org/process/version-management materials and map them into a local
+  `org-process.local.md`, incrementally, then read back for confirmation), a field-mapping table in
+  `references/org-process-config.md` (people-map→A, process/gates→B, cadence/capacity→C, CCB→D,
+  branches→E, maintenance→F), and a broadened frontmatter `description` so the skill activates on that
+  entry point. De-sensitization red line reiterated: real names/URLs/KPIs stay local & gitignored,
+  never committed or put into public/cross-company output.
+
 ## [1.8.0] - 2026-07-01
 
 ### Added
@@ -191,6 +204,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.9.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.9.0
 [1.8.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.8.0
 [1.7.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.7.0
 [1.6.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.6.0
