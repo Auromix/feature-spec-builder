@@ -4,6 +4,29 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-29
+
+### Added
+- **Archetype H — Ecosystem integration / reference implementation / developer docs** in
+  `references/detail-probes.md` (e.g. SDK↔ROS/ROS2 bridge examples, third-party framework adapters,
+  Docker samples, language bindings, quickstart repos, docs-site sections). 5 probes centered on
+  *support level, version matrix + EOL, deliverable form, example anti-rot, and our-maintenance vs
+  customer-owned boundary* — because for this class the low level already supports it; the real risk
+  is the support boundary and keeping examples from rotting.
+- **Two non-runtime implementation layers** in the config-zone layer map and step-4 routing:
+  *docs / developer-portal layer* (DevRel/docs/site owner) and *build / distribution-infra layer*
+  (SDK-build/DevOps owner) — so example/packaging/docs deliverables aren't mis-assigned to
+  firmware/algorithm/hardware.
+- **External-dependency axis** in `references/cross-layer-routing.md`: for needs that depend on an
+  external framework/OS/runtime (ROS distro, DDS, Ubuntu, CPython…), whose EOL clock no internal
+  team owns — with an "external-dependency to-confirm" (conservative-assumption) discipline.
+- **New NFR must-answer "support level & maintenance commitment"** and a principle-4 extension
+  (example code / message schema / docs anchors also become de-facto contracts that can break
+  downstream) in `references/product-principles.md`.
+- Requirement-splitting heuristics: *heterogeneous-deliverable* smell and the *shared-source
+  related-feature cluster* pattern.
+- Worked example `references/example-ros-integration.md` demonstrating archetype H end-to-end.
+
 ## [1.1.0] - 2026-06-29
 
 ### Changed
@@ -45,5 +68,6 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.2.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.0.0
