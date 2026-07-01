@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-07-01
+
+Consolidation / maturity pass after A~J organic growth (audited via a 5-lens workflow + adversarial critic). No new capability — consistency, readability, and self-consistency of the skill's own examples.
+
+### Added
+- **Prototype quick-select index** at the top of `detail-probes.md`: a one-line-per-archetype table
+  (trigger signal, deliverable form, whether it drills into firmware/algorithm/hardware) so the right
+  archetype (A~J) can be picked at a glance. Pure navigation; fields stay authoritative in each section.
+
+### Changed
+- **Modernized the 3 older worked examples** (`example.md` 迎宾导览, `example-ros-integration.md`,
+  `example-offline-install.md`) to the current writing rules — added a Reader Guide (with a Testing/QA
+  row), a Glossary, and a Testing/QA section — so the skill's own "good output" samples follow the
+  rules the skill now mandates. Clarification chains and contracts were left intact (additive only).
+- Added a Testing/QA row to the cross-layer Reader-Guide template.
+
+### Fixed
+- Terminology unified: `构建/分发基建层`, `文档门户层`, `算法服务层`/`硬件层` used consistently.
+- `example-offline-install.md`: repaired two Markdown tables missing separator rows, and a stale
+  in-doc anchor (`【构建/分发层】` → `【构建/分发基建层】`).
+- Cross-references now use section names (e.g. cross-layer 《八》节) instead of positional "末尾".
+
 ## [1.6.0] - 2026-07-01
 
 ### Added
@@ -150,6 +172,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.7.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.7.0
 [1.6.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.6.0
 [1.5.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.1
 [1.5.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.0

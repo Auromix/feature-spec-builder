@@ -44,10 +44,24 @@
 ## 阅读指引（分阅读对象）
 | 阅读对象 | 重点读 | 负责什么 |
 | --- | --- | --- |
-| 产品 / 评审 | 一句话定义、范围、支持等级、故事+验收、决策、遗留 | 确认 as-is 口径与 MVP |
+| 产品 / 评审 | 一句话定义、名词解释、范围、支持等级、故事+验收、决策、遗留 | 确认 as-is 口径与 MVP |
 | 二开 SDK 组 | 双向契约、行为规格、【二开 SDK 组】节 | 写示例节点、状态/控制映射 |
 | 构建 / DevOps | 环境矩阵、【构建/分发基建层】节 | Docker + 一次性冒烟 CI |
 | DevRel / 文档 | 关联特性 B、免责声明口径 | 官网"社区资源"页（非平级）|
+| 测试 / QA | 版本矩阵、双向契约、DX 验收、【测试/QA】节 | 验矩阵覆盖、Docker 内 build + 冒烟、topic 契约可测 |
+
+## 名词解释（术语）
+| 术语 | 说明 |
+| --- | --- |
+| as-is / 官方支持 | as-is=按现状给、社区自维护、不承诺随版本回归/不背书，出问题客户自理；官方支持=我方正式维护、随版本回归、有承诺窗口。两者是两种责任等级，本特性明确取 as-is |
+| EOL | End of Life，某个版本"到期停止维护"的时间点；过了 EOL 的版本官方不再修 bug/补安全，本例 Noetic 已 EOL 故不支持 |
+| distro | ROS 的发行版（如 Noetic、Humble、Jazzy），每个 distro 绑定特定 Ubuntu/Python 版本、各有自己的 EOL 时钟 |
+| DDS | ROS2 底层的数据分发中间件，负责节点间收发消息；ROS 的 topic/QoS 最终经 DDS 传输 |
+| QoS | Quality of Service，收发消息的可靠性策略（如尽力而为 BestEffort vs 可靠 reliable）；状态流和控制指令对可靠性要求不同，需分别设 |
+| pybind | pybind11，把 C++ 代码包成 Python 可调用模块的绑定库；本例用它把 SDK 暴露给 Python 版 ROS 节点 |
+| ABI | 应用二进制接口；编译好的 .so 二进制与特定 Python/编译器版本绑定，版本不对齐就装不上/崩，故要锁 Py3.10 并用 Docker 锁死 |
+| 双向契约 | 对外承诺的两个方向：状态上报（SDK→ROS topic）与控制下达（ROS→SDK），topic/action/service 的名字、消息类型、语义都算契约 |
+| 注册表范式 | `state_adapters[]/control_adapters[]` 的写法：客户加自己的接口=照抄一个单元 + 注册一行，不用改框架 |
 
 ## 一句话定义
 提供一个 **as-is 参考示例仓**：把 SDK 包成一个 **ROS2 Humble** 节点，示范状态上报（→topic）与控制下达（action/service），并用 Docker 锁定可编译环境。**不是官方支持的适配层**。
@@ -67,7 +81,7 @@
 - QoS：状态用 sensor_data(BestEffort)，控制用 reliable；命名空间支持多机器人 `[待确认]`。
 
 ### 【阅读对象：构建/分发基建层】环境与防腐
-- 目标矩阵（MVP 单格）：ROS2 Humble / Ubuntu 22.04 / Py3.10 / gcc11。pybind `.so` 绑死 Py3.10，Docker 内锁死。
+- 目标矩阵（MVP 单格）：ROS2 Humble / Ubuntu 22.04 / Py3.10 / gcc11。pybind `.so` 绑死 Py3.10（ABI 对齐），Docker 内锁死。
 - 防腐（as-is）：示例仓 CI 只做一次性 `colcon build`+ 冒烟；**不**随 SDK 每版回归；README 明示"仅 Humble 验证"。
 - owner：`[待确认·需指派]` 构建/DevOps（非二开 SDK 组默认承担）。
 
@@ -94,6 +108,15 @@ MVP = ROS2 Humble 单格 + 3 状态上报 + move_to/stop + Docker + README。ROS
 ## 接口契约草案（ROS 侧，非 SDK API）
 - topics/actions/services 如上；自定义 `.msg/.srv/.action` 计入**第二套对外表面积**（撞 API 预算纪律）——已尽量复用标准 msg，仅 TaskState 自定义，需版本化。
 - 命名：全小写下划线、ROS 命名空间惯例。
+
+## 测试 / QA
+> 测试对象是**版本矩阵是否真能编过跑通、对外双向契约是否可测、DX 验收是否达标**——as-is 只做一次性验证，不建长期回归。
+- **矩阵覆盖**：本档只覆盖 **ROS2 Humble × Ubuntu 22.04 × Py3.10** 单格；Noetic/其它 distro 明示不在验收范围。验证"矩阵内这一格"确实是被测过的那一格（Docker 锁死的环境=被测环境）。
+- **Docker 内 build + 冒烟**：在给定 Docker 环境**零改动** `colcon build` 通过；启动节点后 `ros2 topic echo /robot/pose`、`/robot/battery`、`/robot/task_state` 均有数据；`ros2 action send_goal move_to ...` 能驱动、可取消；`stop` service 能即时停。
+- **topic 契约可测**：逐条核对对外双向契约——topic/action/service 的**名字、消息类型、QoS**与契约草案一致（状态 BestEffort、控制 reliable）；标准 msg 用对（geometry_msgs/PoseStamped、sensor_msgs/BatteryState），自定义 TaskState.msg 的 schema 与示例仓版本一致。
+- **DX 验收**：新开发者照 README **10 分钟内**在 Docker 里跑通收发；"生人照着 ~15 分钟能新增一个 topic"（注册表范式的可仿照性硬验收）。
+- **安全红线可见**：README 中"控制面无鉴权、仅内网 demo、危险动作不桥接"的警示**显著可见**；确认危险动作（解除急停/直控关节）确实**未**被桥接进来。
+- **防腐边界**：确认 CI 只做一次性 `colcon build`+ 冒烟、**不**随 SDK 每版回归——回归缺失是 as-is 的刻意选择，不作为缺陷。
 
 ## 依赖与前置条件
 - 依赖已有 SDK 状态查询/控制接口（已存在，纯二开）；外部：ROS2 Humble、DDS、Docker。
