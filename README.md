@@ -34,6 +34,7 @@ The skill's method is generic. **You** make it specific to your world by providi
 | **Contents** | Capability tiers (your L1/L2/L3 or your own scheme), capability domains, **your implementation layers** (SaaS may be frontend/backend/data/infra; a chip SDK or cloud platform differs — **not** forced into robot firmware/algorithm/hardware), interface & naming conventions, delivery form, integrator tiers, API budget, product-principle trade-offs | Role map, delivery gates, version cadence & pipeline capacity, CCB (change control board), branch/merge rules, N-version maintenance policy |
 | **Generates from** | "here's what our product looks like" / a product datasheet, SDK reference, capability catalog | "here's how our company works" / an org chart, responsibility matrix, release-process doc, branch spec |
 | **Template + generator** | `references/product-profile-config.md` + `scripts/init-product-profile.sh` | `references/org-process-config.md` + `scripts/init-org-config.sh` |
+| **Filled reference example** | [`references/product-profile.example.md`](skill/feature-spec-builder/references/product-profile.example.md) — a de-sensitized robotics-SDK profile, every group filled, no real company info | [`references/org-process.example.md`](skill/feature-spec-builder/references/org-process.example.md) — a de-sensitized org/process config, roles as example handles, no real names |
 | **Used by the skill to** | classify the feature onto *your* tiers/domains, decompose it across *your* implementation layers, apply *your* interface budget & naming, run *your* product-principle gate | route each owner to a real person, list the delivery gates & artifacts the feature must pass, tie it to a target version & pipeline capacity, flag post-lock changes as needing CCB |
 | **If absent** | the skill uses generic placeholders, marks inferred tiers/layers/owners as `[待确认]`, and offers to generate one — it **never invents** a layer or department name | the skill uses generic role placeholders (e.g. `[产品经理·待指派]`) and offers to generate one |
 
@@ -96,8 +97,8 @@ Now paste the raw feature request. The skill will restate its understanding, spl
 
 Two layers of configuration, both product-agnostic:
 
-1. **Product profile** — the coordinate system the skill classifies and decomposes against. Generalizes what used to be the inline "config-zone A–E" into one generatable file: capability tiers & domains, your implementation layers (**yours**, not robot-specific), interface/naming conventions, delivery form, integrator tiers, API budget, and product-principle trade-offs. Template: `references/product-profile-config.md`.
-2. **Org & process** — the collaboration overlay: role map, delivery gates, version cadence & pipeline capacity, CCB, and maintenance policy. Template: `references/org-process-config.md`.
+1. **Product profile** — the coordinate system the skill classifies and decomposes against. Generalizes what used to be the inline "config-zone A–E" into one generatable file: capability tiers & domains, your implementation layers (**yours**, not robot-specific), interface/naming conventions, delivery form, integrator tiers, API budget, and product-principle trade-offs. Template: `references/product-profile-config.md`; filled reference example: [`references/product-profile.example.md`](skill/feature-spec-builder/references/product-profile.example.md).
+2. **Org & process** — the collaboration overlay: role map, delivery gates, version cadence & pipeline capacity, CCB, and maintenance policy. Template: `references/org-process-config.md`; filled reference example: [`references/org-process.example.md`](skill/feature-spec-builder/references/org-process.example.md).
 
 Both are filled once per team, kept local, and git-ignored.
 
@@ -113,7 +114,9 @@ Both are filled once per team, kept local, and git-ignored.
 │           ├── product-principles.md         # default principles + self-check gate + NFR list
 │           ├── cross-layer-routing.md        # layered model, feasibility gate, per-reader sub-sections
 │           ├── product-profile-config.md     # product-profile template + mechanism (product-agnostic)
+│           ├── product-profile.example.md    # ↳ a filled, de-sensitized reference example
 │           ├── org-process-config.md         # org/process template + mechanism (de-sensitized)
+│           ├── org-process.example.md        # ↳ a filled, de-sensitized reference example
 │           ├── example.md                    # end-to-end single-layer worked example
 │           ├── example-ros-integration.md    # example domain: multi-deliverable (code + docs) feature
 │           ├── example-offline-install.md    # example domain: distribution/packaging feature
@@ -162,6 +165,7 @@ Issues and PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Because this 
 | **内容** | 能力层级（你的 L1/L2/L3 或你自己的分层）、能力域、**你产品自己的实现层**（SaaS 可能是 前端/后端/数据/基础设施；芯片 SDK、云平台各不同——**不硬套**机器人的固件/算法/硬件）、接口/命名约定、交付形态、集成商分级、API 预算、产品原则取舍 | 角色地图、交付 gate、版本节奏与管道容量、CCB（变更决策组）、分支/合入规范、N 版本维护策略 |
 | **从什么生成** | "我们产品长这样" / 产品数据手册、SDK 参考、能力清单 | "我们公司这么协作" / 组织架构图、责任矩阵、发版流程文档、分支规范 |
 | **模板 + 生成脚本** | `references/product-profile-config.md` + `scripts/init-product-profile.sh` | `references/org-process-config.md` + `scripts/init-org-config.sh` |
+| **填好的参考示例** | [`references/product-profile.example.md`](skill/feature-spec-builder/references/product-profile.example.md) —— 脱敏的机器人二开 SDK 产品档案，各组填满、无真实公司信息 | [`references/org-process.example.md`](skill/feature-spec-builder/references/org-process.example.md) —— 脱敏的组织/流程配置，角色用示例代号、无真实人名 |
 | **技能拿它来** | 把特性归到**你的**层级/域、按**你的**实现层做跨层分解、套**你的**接口预算与命名、跑**你的**产品原则 gate | 把 owner 落到真实责任人、列出该特性必过的交付 gate 与交付件、挂到目标版本与管道容量、需求锁定后变更提示走 CCB |
 | **不填时** | 技能用通用占位、把推断的层级/实现层/owner 打 `[待确认]`、并提示可生成一份——**绝不臆造**层名或部门名 | 技能用通用角色占位（如 `[产品经理·待指派]`）、并提示可生成一份 |
 
@@ -223,8 +227,8 @@ cp -R feature-spec-builder/skill/feature-spec-builder ~/.claude/skills/
 
 两层配置，都产品无关：
 
-1. **产品档案** —— 技能归类与分解所依据的坐标系。把原先内联的"配置区 A~E"一般化成一份可生成的文件：能力层级与能力域、你产品自己的实现层（**你的**，不是机器人专属）、接口/命名约定、交付形态、集成商分级、API 预算、产品原则取舍。模板：`references/product-profile-config.md`。
-2. **组织与流程** —— 协作叠加层：角色地图、交付 gate、版本节奏与管道容量、CCB、维护策略。模板：`references/org-process-config.md`。
+1. **产品档案** —— 技能归类与分解所依据的坐标系。把原先内联的"配置区 A~E"一般化成一份可生成的文件：能力层级与能力域、你产品自己的实现层（**你的**，不是机器人专属）、接口/命名约定、交付形态、集成商分级、API 预算、产品原则取舍。模板：`references/product-profile-config.md`；填好的参考示例：[`references/product-profile.example.md`](skill/feature-spec-builder/references/product-profile.example.md)。
+2. **组织与流程** —— 协作叠加层：角色地图、交付 gate、版本节奏与管道容量、CCB、维护策略。模板：`references/org-process-config.md`；填好的参考示例：[`references/org-process.example.md`](skill/feature-spec-builder/references/org-process.example.md)。
 
 两份都是团队填一次、留在本地、加入 `.gitignore`。
 
@@ -240,7 +244,9 @@ cp -R feature-spec-builder/skill/feature-spec-builder ~/.claude/skills/
 │           ├── product-principles.md         # 默认产品原则 + 自检 gate + NFR 清单
 │           ├── cross-layer-routing.md        # 分层模型、可行性 gate、分阅读对象节模板
 │           ├── product-profile-config.md     # 产品档案模板 + 机制（产品无关）
+│           ├── product-profile.example.md    # ↳ 一份填好的脱敏参考示例
 │           ├── org-process-config.md         # 组织/流程模板 + 机制（脱敏）
+│           ├── org-process.example.md        # ↳ 一份填好的脱敏参考示例
 │           ├── example.md                    # 端到端单层范例
 │           ├── example-ros-integration.md    # 示例领域：多交付物（代码 + 文档）特性
 │           ├── example-offline-install.md    # 示例领域：分发/打包特性

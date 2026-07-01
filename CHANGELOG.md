@@ -4,6 +4,25 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-07-01
+
+### Added
+- **Two filled reference examples** so a third-party developer can *see* a completed config before making
+  their own — not just an empty template:
+  - `references/product-profile.example.md` — a fully-filled, **de-sensitized** product profile for a robotics
+    secondary-development SDK (groups A–H all filled: capability tiers/domains, implementation layers × teams,
+    C++/pybind11 snake_case interface conventions, delivery form, integrator tiers, API budget, safety
+    principles). No real company/product/people — vendor is a neutral placeholder, models are `R1/R2/R3`,
+    domain is `developer.example.com`.
+  - `references/org-process.example.md` — a fully-filled, **de-sensitized** org/process config (role map with
+    example role handles, 5-stage delivery + gates, version cadence & pipeline capacity, CCB, branch/merge,
+    N-version maintenance). No real names or internal links.
+  - Each is cross-linked from its template (`*-config.md`), the SKILL config zone, and the README's
+    two-config comparison table + repo tree. Both end with a "how to generate your own" section pointing at
+    the skill trigger and the init script.
+- Generated via a 4-phase workflow (draft → 3 de-sensitization skeptics + quality critic per file → repair →
+  re-verify). Every de-sensitization pass returned clean; verified again by a repo-wide grep gate before publish.
+
 ## [1.10.0] - 2026-07-01
 
 ### Changed
@@ -226,6 +245,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.11.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.11.0
 [1.10.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.10.0
 [1.9.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.9.0
 [1.8.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.8.0
