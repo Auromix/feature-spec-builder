@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-07-01
+
+### Added
+- **Archetype I — Packaging / distribution / offline-install / deployment.** For features whose
+  deliverable is *an artifact you install onto a target machine* (offline/air-gapped installers,
+  one-command install scripts, prebuilt-artifact distribution, Docker/K8s deploy bundles, private
+  offline repos). A~H didn't cover the installer itself; the risk isn't "does the low level support
+  it" (it exists) but "can the artifact install cleanly, verifiably, upgradeably on the target".
+  5 net-new probes (dependency-bundling incl. redistribution-license gate; install form + interactive
+  vs silent boundary; integrity/signature fail-closed; install-time lifecycle self-check/idempotency/
+  upgrade/uninstall/coexistence; permission landing) — platform matrix / EOL / support level / DX
+  anchor are *reused* from H②③⑥ + the external-dependency axis, not re-listed.
+- **H↔I mutual-exclusion rule** (installable package/script itself → I; sample/docs to copy → H),
+  plus a note that H/I never drill down to firmware/algorithm/hardware.
+- **L-Tier N/A exit for non-runtime features** (delivery/distribution/install/docs) in step-3
+  classification and the Capability-Positioning template section.
+- **Build/distribution-infra layer as bottom-most layer**: a sub-checklist + a high-risk
+  mis-assignment red flag ("packaging/distribution/install defaulted to the SDK team") in
+  `references/cross-layer-routing.md`.
+- Worked example `references/example-offline-install.md`.
+- Surfaced while running the skill on an offline-install requirement (network-failure / air-gapped).
+
 ## [1.3.0] - 2026-07-01
 
 ### Added
@@ -79,6 +101,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.4.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.0
 [1.3.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.3.0
 [1.2.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.1.0
