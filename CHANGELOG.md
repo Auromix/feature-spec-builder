@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-07-01
+
+### Changed
+- **Product-agnostic.** The skill was implicitly robotics-flavored (a hard-coded firmware/algorithm/
+  hardware layer model, robot-only examples, "robots can physically harm" safety wording). Now the
+  **implementation-layer set is defined by your product profile** — a robotics SDK uses firmware/
+  algorithm/hardware, a SaaS uses frontend/backend/data/infra, a chip SDK or cloud platform draws its
+  own. The robotics material (beam steering, ROS, end-effector mods) is explicitly framed as **one
+  worked example domain**, not a prerequisite. Config zone reframed as **"your product profile"**;
+  step-4 layer routing, output-template rows, and the frontmatter description are all generalized;
+  the safety principle now covers any product's high-risk actions (physical harm / financial loss /
+  data breach / auth bypass), with robot physical harm as one instance.
+- **README rewritten** to be understandable by both agents and humans: product-agnostic framing, an
+  explicit "for the agent — the mechanics" section, and a comparison table of the **two local configs**
+  a user provides (product profile + org/process).
+
+### Added
+- **Product profile as a generatable local config**, parallel to the org/process config:
+  `references/product-profile-config.md` (de-sensitized template + how the skill uses it + a trigger:
+  "here's what our product looks like" → generate `product-profile.local.md`) and
+  `scripts/init-product-profile.sh`. Externalizes config-zone A–E so product-specifics aren't baked in.
+
 ## [1.9.0] - 2026-07-01
 
 ### Added
@@ -204,6 +226,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.10.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.10.0
 [1.9.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.9.0
 [1.8.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.8.0
 [1.7.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.7.0
