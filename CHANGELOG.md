@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-07-01
+
+### Added
+- **Writing-quality & readability rules.** Specs must read as plain, connected prose (not a pile of
+  fragments), be structured as *shared background + per-audience sections + a glossary*, and
+  **constrain the external delivery form (interfaces, product form, deliverable format, supported
+  platforms, acceptance) while leaving internal technical implementation to R&D** (implementation
+  choices become "R&D decides" or non-binding suggestions — a spec is not a design doc).
+- Output template now includes a **《名词解释》(glossary)** section and an explicit "shared
+  background, read first" convention in the Reader Guide.
+
 ## [1.4.1] - 2026-07-01
 
 ### Fixed
@@ -109,6 +120,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.5.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.0
 [1.4.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.1
 [1.4.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.4.0
 [1.3.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.3.0
