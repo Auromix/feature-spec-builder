@@ -4,6 +4,25 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-07-01
+
+### Added
+- **Company-level collaboration via a local, private org/process config.** Each company's
+  people/roles/process/version-cadence differ and are private, so they are NOT baked into the skill.
+  New `references/org-process-config.md` ships a **de-sensitized template + mechanism** (no real names),
+  and `scripts/init-org-config.sh` scaffolds a local, **gitignored** `org-process.local.md` the user
+  fills in. When present, the skill uses it to route owners to real people, list the delivery gates &
+  artifacts a feature must pass (requirement-lock / design review / self-test = test-entry / acceptance
+  / release review), tie the feature to a target version and pipeline capacity (person-days), and flag
+  post-lock changes as needing CCB. Config-zone group **F** + an 影响评估 "版本与流程协同" line reference it.
+- Distilled the de-sensitized *patterns* of a real company release process (5-stage delivery, role map,
+  gates, version cadence & pipeline capacity, CCB change control, N-version maintenance) into the template
+  so the skill fits company-level requirement planning — without storing any company's private data.
+
+### Security
+- `.gitignore` now excludes `org-process.local.md` / `*.local.md`; real names & internal process live
+  only in the local config, never in the skill or repo.
+
 ## [1.7.0] - 2026-07-01
 
 Consolidation / maturity pass after A~J organic growth (audited via a 5-lens workflow + adversarial critic). No new capability — consistency, readability, and self-consistency of the skill's own examples.
@@ -172,6 +191,7 @@ First public release.
   example embedded in `cross-layer-routing.md`.
 - Packaging script (`scripts/build-skill.sh`) and CI workflow.
 
+[1.8.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.8.0
 [1.7.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.7.0
 [1.6.0]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.6.0
 [1.5.1]: https://github.com/Auromix/feature-spec-builder/releases/tag/v1.5.1

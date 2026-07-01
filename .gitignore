@@ -2,6 +2,10 @@
 /dist/
 *.skill
 
+# Local, private org/process config (real names / internal process — never commit)
+org-process.local.md
+*.local.md
+
 # macOS
 .DS_Store
 
